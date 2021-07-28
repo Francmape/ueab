@@ -36,7 +36,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
-    // _checkIsNewUser();
+    _checkIsNewUser();
     super.initState();
   }
 
@@ -44,18 +44,16 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     Widget body = Container(
-        color: Theme.of(context).primaryColor,
-        height: size.height,
-        width: double.infinity,
-        child: Center(
-          child: FittedBox(
-            fit: BoxFit.fill,
-            child: Image.asset(
-              'assets/images/logo.png',
-              height: 200,
-            ),
-          ),
-        ));
+      color: Theme.of(context).primaryColor,
+      height: size.height,
+      width: double.infinity,
+      child: Center(
+        child: Image.asset(
+          'assets/images/logo.png',
+          height: 200,
+        ),
+      ),
+    );
     return Platform.isAndroid
         ? Scaffold(body: body)
         : CupertinoPageScaffold(child: body);

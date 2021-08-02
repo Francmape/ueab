@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
+import 'package:ueab/authentication/login_screen.dart';
 import 'package:ueab/widgets/card_event.dart';
 import '../../widgets/card_home.dart';
 import '../../utils/raw_data.dart';
@@ -28,9 +29,12 @@ class _IndexScreenState extends State<IndexScreen> {
           const SizedBox(height: 120.0),
           Row(
             children: [
-              Image.asset(
-                'assets/images/logo.png',
-                height: 150,
+              Hero(
+                tag: 'logo',
+                child: Image.asset(
+                  'assets/images/logo.png',
+                  height: 150,
+                ),
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,7 +53,8 @@ class _IndexScreenState extends State<IndexScreen> {
                       constraints: BoxConstraints.tightFor(
                           width: size.width * .30, height: 35),
                       child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () => Navigator.of(context)
+                              .pushNamed(LoginScreen.routeName),
                           style: ElevatedButton.styleFrom(
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30.0),
@@ -117,9 +122,9 @@ class _IndexScreenState extends State<IndexScreen> {
           ),
           const SizedBox(height: 20.0),
           Row(
-            children: [
+            children: const [
               SizedBox(width: 10.0),
-              const Text(
+              Text(
                 'Events',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0),
               ),
@@ -141,11 +146,11 @@ class _IndexScreenState extends State<IndexScreen> {
             extendBodyBehindAppBar: true,
             appBar: AppBar(
               iconTheme: const IconThemeData(color: Colors.white),
-              backgroundColor: Colors.white,
+              backgroundColor: Theme.of(context).primaryColor,
               centerTitle: false,
               title: const Text(
                 'ueab',
-                style: TextStyle(color: Colors.black),
+                // style: TextStyle(color: Colors.black),
               ),
             ),
             body: body)
@@ -153,9 +158,9 @@ class _IndexScreenState extends State<IndexScreen> {
             navigationBar: CupertinoNavigationBar(
               leading: const Text(
                 'Index',
-                style: TextStyle(color: Colors.black),
+                // style: TextStyle(color: Colors.black),
               ),
-              backgroundColor: Colors.white,
+              backgroundColor: Theme.of(context).primaryColor,
             ),
             child: body);
   }

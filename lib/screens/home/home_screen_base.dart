@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
+import '../../screens/home/drawer_screen.dart';
 import '../../providers/auth_provider.dart';
 import '../../screens/home/home_screen.dart';
 import 'dart:io' show Platform;
@@ -16,6 +17,11 @@ class HomeBaseScreen extends StatefulWidget {
 class _HomeBaseScreenState extends State<HomeBaseScreen> {
   int _index = 0;
   String _title = '';
+
+  double xOffset = 0;
+  double yOffset = 0;
+  double scaleFactor = 1;
+  bool isDrawerOpen = false;
 
   List<Widget> screens = [
     HomeScreen(),
@@ -57,6 +63,24 @@ class _HomeBaseScreenState extends State<HomeBaseScreen> {
     }
   }
 
+  void _openDrawer() {
+    setState(() {
+      xOffset = 230;
+      yOffset = 150;
+      scaleFactor = 0.6;
+      isDrawerOpen = true;
+    });
+  }
+
+  void _closeDrawer() {
+    setState(() {
+      xOffset = 0;
+      yOffset = 0;
+      scaleFactor = 1;
+      isDrawerOpen = false;
+    });
+  }
+
   Widget _bottomNavigationBar() {
     return BottomNavigationBar(
       backgroundColor: Colors.transparent,
@@ -65,12 +89,12 @@ class _HomeBaseScreenState extends State<HomeBaseScreen> {
       currentIndex: _index,
       onTap: (int index) => _onItemTapped(index),
       elevation: 0,
-      items: [
+      items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: 'Home'),
         BottomNavigationBarItem(
-            icon: Icon(Icons.favorite_border), label: 'Favorites'),
+            icon: Icon(Icons.house_outlined), label: 'Departments'),
         BottomNavigationBarItem(
-            icon: Icon(Icons.attach_money_outlined), label: 'Payments'),
+            icon: Icon(Icons.pending), label: 'Affairs'),
         BottomNavigationBarItem(
             icon: Icon(Icons.person_outline_outlined), label: 'Profile'),
       ],
@@ -80,23 +104,36 @@ class _HomeBaseScreenState extends State<HomeBaseScreen> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    Widget body = screens[_index];
     AuthProvider authProvider =
         Provider.of<AuthProvider>(context, listen: true);
+    Widget body = Stack(
+      children: [
+        const DrawerScreen(),
+        AnimatedContainer(
+          color: Colors.white,
+          duration: const Duration(milliseconds: 250),
+          transform: Matrix4.translationValues(xOffset, yOffset, 0)
+            ..scale(scaleFactor),
+          child: screens[_index],
+        )
+      ],
+    );
     return Platform.isAndroid
         ? Scaffold(
             extendBodyBehindAppBar: true,
             appBar: AppBar(
               leading: IconButton(
-                icon: Icon(Icons.vertical_distribute),
-                onPressed: () {},
+                icon: isDrawerOpen
+                    ? const Icon(Icons.arrow_back)
+                    : const Icon(Icons.vertical_distribute),
+                onPressed: isDrawerOpen ? _closeDrawer : _openDrawer,
               ),
-              iconTheme: IconThemeData(color: Colors.white),
+              iconTheme: const IconThemeData(color: Colors.white),
               backgroundColor: Theme.of(context).primaryColor,
               centerTitle: false,
               title: Text(
                 _index == 0 ? 'Hello, ${authProvider.getUserName}' : _title,
-                style: TextStyle(color: Colors.white, fontSize: 15),
+                style: const TextStyle(color: Colors.white, fontSize: 15),
               ),
             ),
             bottomNavigationBar: _bottomNavigationBar(),
@@ -104,12 +141,12 @@ class _HomeBaseScreenState extends State<HomeBaseScreen> {
         : CupertinoPageScaffold(
             navigationBar: CupertinoNavigationBar(
               leading: IconButton(
-                icon: Icon(Icons.vertical_distribute),
-                onPressed: () {},
+                icon: const Icon(Icons.vertical_distribute),
+                onPressed: _openDrawer,
               ),
               middle: Text(
                 'Hello, ${authProvider.getUserName}',
-                style: TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.white),
               ),
               backgroundColor: Colors.transparent,
             ),

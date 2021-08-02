@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:ueab/authentication/login_screen.dart';
+import 'package:ueab/screens/home/home_screen_base.dart';
 import 'package:ueab/screens/index.dart';
 import './screens/onboard/splash_screen.dart';
 import './helpers/custom_route.dart';
@@ -24,13 +26,13 @@ class MyApp extends StatelessWidget {
             backgroundColor: Colors.green,
             appBarTheme: AppBarTheme(
                 color: Colors.transparent,
-                iconTheme: IconThemeData(
+                iconTheme: const IconThemeData(
                   color: Colors.black,
                 ),
                 centerTitle: true,
                 // elevation: 0.0,
                 textTheme: ThemeData.light().textTheme.copyWith(
-                      headline6: TextStyle(
+                      headline6: const TextStyle(
                           fontSize: 18.0,
                           fontWeight: FontWeight.bold,
                           color: Colors.black),
@@ -43,9 +45,11 @@ class MyApp extends StatelessWidget {
             ),
             visualDensity: VisualDensity.adaptivePlatformDensity,
           ),
-          home: SplashScreen(),
+          home: const SplashScreen(),
           routes: {
-            IndexScreen.routeName: (context) => IndexScreen(),
+            IndexScreen.routeName: (context) => const IndexScreen(),
+            LoginScreen.routeName: (context) => const LoginScreen(),
+            HomeBaseScreen.routeName: (context) => const HomeBaseScreen(),
           },
         ),
       ),
@@ -54,15 +58,15 @@ class MyApp extends StatelessWidget {
 }
 
 Map<int, Color> color = {
-  50: Color.fromRGBO(1, 19, 39, .1),
-  100: Color.fromRGBO(1, 19, 39, .2),
-  200: Color.fromRGBO(1, 19, 39, .3),
-  300: Color.fromRGBO(1, 19, 39, .4),
-  400: Color.fromRGBO(1, 19, 39, .5),
-  500: Color.fromRGBO(1, 19, 39, .6),
-  600: Color.fromRGBO(1, 19, 39, .7),
-  700: Color.fromRGBO(1, 19, 39, .8),
-  800: Color.fromRGBO(1, 19, 39, .9),
-  900: Color.fromRGBO(1, 19, 39, 1),
+  50: const Color.fromRGBO(1, 19, 39, .1),
+  100: const Color.fromRGBO(1, 19, 39, .2),
+  200: const Color.fromRGBO(1, 19, 39, .3),
+  300: const Color.fromRGBO(1, 19, 39, .4),
+  400: const Color.fromRGBO(1, 19, 39, .5),
+  500: const Color.fromRGBO(1, 19, 39, .6),
+  600: const Color.fromRGBO(1, 19, 39, .7),
+  700: const Color.fromRGBO(1, 19, 39, .8),
+  800: const Color.fromRGBO(1, 19, 39, .9),
+  900: const Color.fromRGBO(1, 19, 39, 1),
 };
 MaterialColor colorCustom = MaterialColor(0xFF092544, color);

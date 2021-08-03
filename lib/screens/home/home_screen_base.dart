@@ -91,10 +91,8 @@ class _HomeBaseScreenState extends State<HomeBaseScreen> {
       elevation: 0,
       items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: 'Home'),
-        BottomNavigationBarItem(
-            icon: Icon(Icons.house_outlined), label: 'Departments'),
-        BottomNavigationBarItem(
-            icon: Icon(Icons.pending), label: 'Affairs'),
+        BottomNavigationBarItem(icon: Icon(Icons.apartment), label: 'Schools'),
+        BottomNavigationBarItem(icon: Icon(Icons.school), label: 'Affairs'),
         BottomNavigationBarItem(
             icon: Icon(Icons.person_outline_outlined), label: 'Profile'),
       ],
@@ -109,12 +107,21 @@ class _HomeBaseScreenState extends State<HomeBaseScreen> {
     Widget body = Stack(
       children: [
         const DrawerScreen(),
-        AnimatedContainer(
-          color: Colors.white,
-          duration: const Duration(milliseconds: 250),
-          transform: Matrix4.translationValues(xOffset, yOffset, 0)
-            ..scale(scaleFactor),
-          child: screens[_index],
+        ClipRRect(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(isDrawerOpen ? 20 : 0),
+            topRight: Radius.circular(isDrawerOpen ? 20 : 0),
+          ),
+          child: AnimatedContainer(
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(isDrawerOpen ? 20 : 0),
+                      topLeft: Radius.circular(isDrawerOpen ? 20 : 0))),
+              duration: const Duration(milliseconds: 250),
+              transform: Matrix4.translationValues(xOffset, yOffset, 0)
+                ..scale(scaleFactor),
+              child: screens[_index]),
         )
       ],
     );
@@ -131,10 +138,6 @@ class _HomeBaseScreenState extends State<HomeBaseScreen> {
               iconTheme: const IconThemeData(color: Colors.white),
               backgroundColor: Theme.of(context).primaryColor,
               centerTitle: false,
-              title: Text(
-                _index == 0 ? 'Hello, ${authProvider.getUserName}' : _title,
-                style: const TextStyle(color: Colors.white, fontSize: 15),
-              ),
             ),
             bottomNavigationBar: _bottomNavigationBar(),
             body: body)
@@ -143,10 +146,6 @@ class _HomeBaseScreenState extends State<HomeBaseScreen> {
               leading: IconButton(
                 icon: const Icon(Icons.vertical_distribute),
                 onPressed: _openDrawer,
-              ),
-              middle: Text(
-                'Hello, ${authProvider.getUserName}',
-                style: const TextStyle(color: Colors.white),
               ),
               backgroundColor: Colors.transparent,
             ),

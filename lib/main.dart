@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:ueab/authentication/login_screen.dart';
-import 'package:ueab/screens/home/home_screen_base.dart';
-import 'package:ueab/screens/index.dart';
+import './screens/authentication/login_screen.dart';
+import './screens/home/home_screen_base.dart';
+import './screens/index.dart';
 import './screens/onboard/splash_screen.dart';
 import './helpers/custom_route.dart';
 import './providers/auth_provider.dart';

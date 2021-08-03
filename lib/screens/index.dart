@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
-import 'package:ueab/authentication/login_screen.dart';
-import 'package:ueab/widgets/card_event.dart';
+import '../../screens/authentication/login_screen.dart';
+import '../../widgets/card_event.dart';
 import '../../widgets/card_home.dart';
 import '../../utils/raw_data.dart';
 
@@ -149,16 +149,16 @@ class _IndexScreenState extends State<IndexScreen> {
               backgroundColor: Theme.of(context).primaryColor,
               centerTitle: false,
               title: const Text(
-                'ueab',
-                // style: TextStyle(color: Colors.black),
+                'UEAB',
+                style: TextStyle(color: Colors.white),
               ),
             ),
             body: body)
         : CupertinoPageScaffold(
             navigationBar: CupertinoNavigationBar(
               leading: const Text(
-                'Index',
-                // style: TextStyle(color: Colors.black),
+                'UEAB',
+                style: TextStyle(color: Colors.white),
               ),
               backgroundColor: Theme.of(context).primaryColor,
             ),

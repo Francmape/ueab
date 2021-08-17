@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
+import '../../screens/schools/schools_screen.dart';
+import '../../screens/students_affairs/students_affairs_screen.dart';
 import '../../screens/home/drawer_screen.dart';
 import '../../providers/auth_provider.dart';
 import '../../screens/home/home_screen.dart';
@@ -24,10 +26,10 @@ class _HomeBaseScreenState extends State<HomeBaseScreen> {
   bool isDrawerOpen = false;
 
   List<Widget> screens = [
-    HomeScreen(),
-    HomeScreen(),
-    HomeScreen(),
-    HomeScreen(),
+    const HomeScreen(),
+    const SchoolsScreen(),
+    const StudentsAffairsScreen(),
+    const HomeScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -40,14 +42,14 @@ class _HomeBaseScreenState extends State<HomeBaseScreen> {
         });
         break;
       case 1:
-        print('Favorites');
+        print('Schools');
         setState(() {
           _index = index;
           _title = 'Favorites';
         });
         break;
       case 2:
-        print('Payments');
+        print('Affairs');
         setState(() {
           _index = index;
           _title = '';

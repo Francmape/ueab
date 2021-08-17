@@ -5,7 +5,6 @@ import 'dart:io' show Platform;
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class HomeScreen extends StatefulWidget {
-  static const routeName = '/home';
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
